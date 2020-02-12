@@ -19,10 +19,13 @@ module.exports = {
 		pet(_, { input }, { models }) {
 			return input ? models.Pet.findOne(input) : models.Pet.findOne();
 		}
-	}
-	// Mutation: {
+	},
 
-	// },
+	Mutation: {
+		pet(_, { input }, { models }) {
+			return models.Pet.create(input);
+		}
+	}
 	// Pet: {
 	//   img(pet) {
 	//     return pet.type === 'DOG'
