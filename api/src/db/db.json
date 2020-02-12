@@ -1,7 +1,11 @@
 {
-  "user": {
-    "id": "jBWMVGjm50l6LGwepDoty",
-    "username": "frontendmaster"
-  },
-  "pet": []
+	"user": {
+		"id": "jBWMVGjm50l6LGwepDoty",
+		"username": "frontendmaster"
+	},
+	"pet": [
+		{ "name": "Fluffy", "type": "rabbit" },
+		{ "name": "Tony", "type": "tiger" },
+		{ "name": "Clifford", "type": "big red dog" }
+	]
 }
