@@ -4,11 +4,15 @@ const { gql } = require("apollo-server");
  * Type Definitions for our Schema using the SDL.
  */
 const typeDefs = gql`
+	# This is how you comment in GraphQL
 	type User {
 		id: ID!
 		username: String!
 	}
 
+	"""
+	This is how you add documentation to your definitions.
+	"""
 	type Pet {
 		id: ID!
 		createdAt: String!
