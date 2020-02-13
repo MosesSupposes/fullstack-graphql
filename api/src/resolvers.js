@@ -22,18 +22,21 @@ module.exports = {
 	},
 
 	Mutation: {
-		pet(_, { input }, { models }) {
+		newPet(_, { input }, { models }) {
 			return models.Pet.create(input);
 		}
+	},
+	Pet: {
+		owner(_, __, { models }) {
+			// There's only one user in the database.
+			const user = models.User.findOne();
+			return user;
+		}
+	},
+	User: {
+		pets(_, __, { models }) {
+			const allPets = models.Pet.findMany();
+			return allPets;
+		}
 	}
-	// Pet: {
-	//   img(pet) {
-	//     return pet.type === 'DOG'
-	//       ? 'https://placedog.net/300/300'
-	//       : 'http://placekitten.com/300/300'
-	//   }
-	// },
-	// User: {
-
-	// }
 };
