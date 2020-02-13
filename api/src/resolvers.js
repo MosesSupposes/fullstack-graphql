@@ -39,8 +39,11 @@ module.exports = {
 		}
 	},
 	User: {
-		pets(_, __, { models }) {
-			const allPets = models.Pet.findMany();
+		// To reiterate, the first argument comes from the top level resolver, which was the query for a User.
+		//(You can always tell by looking at the key of the field resolver -- in this case, User.) The first
+		// arguemnt is an object containing the fields for that user that were queried in the first resolver.
+		pets(user, __, { models }) {
+			const allPets = models.Pet.findMany({ owner: user.id });
 			return allPets;
 		}
 	}
