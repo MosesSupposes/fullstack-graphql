@@ -30,7 +30,12 @@ const typeDefs = gql`
 
 	input PetCreationInput {
 		name: String!
-		type: String!
+		type: PetType!
+	}
+
+	enum PetType {
+		DOG
+		CAT
 	}
 
 	type Query {
