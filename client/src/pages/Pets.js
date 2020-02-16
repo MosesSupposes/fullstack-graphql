@@ -24,6 +24,8 @@ export default function Pets() {
 		setModal(false);
 	};
 
+	// The app wil break if you leave off the loading handler.
+	// You will get the error: "Can not read pets of undefined".
 	if (loading) {
 		return <Loader />;
 	}
