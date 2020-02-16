@@ -40,7 +40,7 @@ export default function Pets() {
 			// anywhere that uses the ALL_PETS query.
 			cache.writeQuery({
 				query: ALL_PETS,
-				data: { pets: allPets.concat(newPet) }
+				data: { pets: [newPet, ...allPets] }
 			});
 		}
 	});
@@ -48,13 +48,28 @@ export default function Pets() {
 	const onSubmit = input => {
 		setModal(false);
 		createPet({
-			variables: { newPet: input }
+			variables: { newPet: input },
+			// You can specify an optimistic response to match what's returned from the server.
+			// This will preload the response data from the server in your UI before the response
+			// comes back from the server. You must specify all the data that comes back from the
+			// server, including the "__typename" field (which doesn't show up in tools like graphql playground).
+			// If you opt in to the optimistic response, you have to opt out to a loading state.
+			optimisticResponse: {
+				__typename: "Mutation",
+				newPet: {
+					__typename: "Pet",
+					id: "whatever, it doesn't matter as long as the types match (string)",
+					img: "https://via.placeholder.com/300",
+					name: input.name,
+					type: input.type
+				}
+			}
 		});
 	};
 
 	// The app wil break if you leave off the loading handler.
 	// You will get the error: "Can not read pets of undefined".
-	if (loading || l) {
+	if (loading) {
 		return <Loader />;
 	}
 
