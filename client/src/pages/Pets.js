@@ -9,6 +9,7 @@ const query = gql`
 	query {
 		pets {
 			id
+			img
 			name
 			type
 		}
@@ -17,7 +18,7 @@ const query = gql`
 
 export default function Pets() {
 	const [modal, setModal] = useState(false);
-	const { data, loading } = useQuery(query);
+	const { data, loading, error } = useQuery(query);
 
 	const onSubmit = input => {
 		setModal(false);
