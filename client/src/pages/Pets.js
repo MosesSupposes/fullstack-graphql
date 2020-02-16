@@ -28,6 +28,10 @@ export default function Pets() {
 		return <Loader />;
 	}
 
+	if (error) {
+		return <p>Whoops. There was an error.</p>;
+	}
+
 	if (modal) {
 		return <NewPetModal onSubmit={onSubmit} onCancel={() => setModal(false)} />;
 	}
