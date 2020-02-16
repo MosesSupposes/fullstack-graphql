@@ -16,21 +16,38 @@ const ALL_PETS = gql`
 	}
 `;
 
+const NEW_PET = gql`
+	mutation CreateAPet($newPet: PetCreationInput!) {
+		newPet(input: $newPet) {
+			id
+			img
+			name
+			type
+		}
+	}
+`;
+
 export default function Pets() {
 	const [modal, setModal] = useState(false);
 	const { data, loading, error } = useQuery(ALL_PETS);
+	// The first index is the function used to actually run the mutation.
+	// The second index is the same object you get with the useQuery hook.
+	const [createPet, { data: d, loading: l, error: e }] = useMutation(NEW_PET);
 
 	const onSubmit = input => {
 		setModal(false);
+		createPet({
+			variables: { newPet: input }
+		});
 	};
 
 	// The app wil break if you leave off the loading handler.
 	// You will get the error: "Can not read pets of undefined".
-	if (loading) {
+	if (loading || l) {
 		return <Loader />;
 	}
 
-	if (error) {
+	if (error || e) {
 		return <p>Whoops. There was an error.</p>;
 	}
 
