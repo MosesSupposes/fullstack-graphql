@@ -4,8 +4,8 @@
 		"username": "frontendmaster"
 	},
 	"pet": [
-		{ "name": "Fluffy", "type": "rabbit" },
-		{ "name": "Tony", "type": "tiger" },
-		{ "name": "Clifford", "type": "big red dog" }
+		{ "id": 1, "name": "Fluffy", "type": "rabbit" },
+		{ "id": 2, "name": "Tony", "type": "tiger" },
+		{ "id": 3, "name": "Clifford", "type": "big red dog" }
 	]
 }
