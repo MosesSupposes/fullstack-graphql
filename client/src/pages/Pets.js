@@ -32,7 +32,18 @@ export default function Pets() {
 	const { data, loading, error } = useQuery(ALL_PETS);
 	// The first index is the function used to actually run the mutation.
 	// The second index is the same object you get with the useQuery hook.
-	const [createPet, { data: d, loading: l, error: e }] = useMutation(NEW_PET);
+	const [createPet, { data: d, loading: l, error: e }] = useMutation(NEW_PET, {
+		update(cache, { data: { newPet } }) {
+			// Read the pets from the cache (corresponds with the query field on line 10)
+			const { pets: allPets } = cache.readQuery({ query: ALL_PETS });
+			// Update the cache to include the newly created pet. This will trigger a re-render
+			// anywhere that uses the ALL_PETS query.
+			cache.writeQuery({
+				query: ALL_PETS,
+				data: { pets: allPets.concat(newPet) }
+			});
+		}
+	});
 
 	const onSubmit = input => {
 		setModal(false);
