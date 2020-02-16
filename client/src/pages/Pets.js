@@ -6,7 +6,7 @@ import NewPetModal from "../components/NewPetModal";
 import Loader from "../components/Loader";
 
 const ALL_PETS = gql`
-	query {
+	query AllPets {
 		pets {
 			id
 			img
