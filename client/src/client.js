@@ -5,6 +5,20 @@ import { ApolloLink } from "apollo-link";
 import { setContext } from "apollo-link-context";
 import gql from "graphql-tag";
 
+const typeDefs = gql`
+	extend type User {
+		age: Int
+	}
+`;
+
+const resolvers = {
+	User: {
+		age() {
+			return 35;
+		}
+	}
+};
+
 /**
  * Create a new apollo client and export as default
  */
@@ -26,7 +40,9 @@ const cache = new InMemoryCache();
 
 const client = new ApolloClient({
 	link,
-	cache
+	cache,
+	resolvers,
+	typeDefs
 });
 
 export default client;
